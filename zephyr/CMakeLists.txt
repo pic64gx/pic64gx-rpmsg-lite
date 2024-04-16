@@ -8,6 +8,10 @@ if(CONFIG_RPMSGLITE)
 
   project (rpmsglite C)
 
+  if("${CONFIG_SOC_SERIES}" STREQUAL "polarfire")
+    set(CONFIG_SOC polarfire)
+  endif()
+
   # Get MCUX_DEVICE and MCUX_DEVICE_PATH from CONFIG_SOC
   # For example, if CONFIG_SOC=mimx8ml8_ca53, then MCUX_DEVICE=MIMX8ML8_ca53
   # and MCUX_DEVICE_PATH=MIMX8ML8
@@ -33,7 +37,9 @@ if(CONFIG_RPMSGLITE)
   elseif("${MCUX_DEVICE}" STREQUAL "MIMXRT1176_cm4" OR "${MCUX_DEVICE}" STREQUAL "MIMXRT1176_cm7")
     set(RPMSG_LITE_PLATFORM_PATH "imxrt1170")
   elseif("${MCUX_DEVICE}" STREQUAL "MIMXRT1166_cm4" OR "${MCUX_DEVICE}" STREQUAL "MIMXRT1166_cm7")
-  set(RPMSG_LITE_PLATFORM_PATH "imxrt1160")
+    set(RPMSG_LITE_PLATFORM_PATH "imxrt1160")
+  elseif("${MCUX_DEVICE}" STREQUAL "POLARFIRE")
+    set(RPMSG_LITE_PLATFORM_PATH "polarfire")
   else()
     message(FATAL_ERROR "RPMSG-Lite Selected for unsupported platform: ${CONFIG_SOC}")
   endif()

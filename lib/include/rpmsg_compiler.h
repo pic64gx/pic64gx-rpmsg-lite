@@ -93,6 +93,17 @@
 #define RL_PACKED_END __attribute__((__packed__))
 #endif
 
+#elif defined(__riscv)
+#define MEM_BARRIER() __asm__ volatile("fence.i" : : : "memory")
+
+#ifndef RL_PACKED_BEGIN
+#define RL_PACKED_BEGIN
+#endif
+
+#ifndef RL_PACKED_END
+#define RL_PACKED_END __attribute__((__packed__))
+#endif
+
 /* GNUC */
 #elif defined(__GNUC__)
 
