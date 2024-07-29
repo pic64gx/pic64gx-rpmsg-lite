@@ -256,11 +256,8 @@ int32_t platform_deinit_interrupt(uint32_t vector_id)
 void platform_ready(uint32_t link_id)
 {
 	uint32_t msg = MIV_RP_MBOX_READY;
-
     env_lock_mutex(platform_lock);
-
 	(void)IHC_tx_message(RL_GET_COM_ID_FROM_LINK_ID(link_id), (uint32_t *) &msg, sizeof(msg));
-    k_event_wait(&msg_event, 0x001, true, K_FOREVER);
     env_unlock_mutex(platform_lock);
 }
 #endif
